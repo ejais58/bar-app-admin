@@ -1,0 +1,39 @@
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .example-form {
+    min-width: 300px;
+    max-width: 400px;
+    height: 400px;
+    width: 100%;
+    box-shadow: 0 3px 3px 3px rgb(0, 0, 0, 0.2);
+    border-radius: 3px;
+    
+  }
+  
+  .example-full-width {
+    width: 80%;
+  }
+  
+  form {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .btn-login{
+    margin-top: 25px;
+  }
+
+  
+  h2{
+    margin: 40px;
+    padding: 10px;
+  }
+  
+.input-name{
+    font-size: 17px;
+}

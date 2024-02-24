@@ -1,0 +1,23 @@
+<div class="container">
+    <form class="example-form" [formGroup]="miFormulario" >
+      <h2>Login</h2>
+      <mat-form-field class="example-full-width" ngDefaultControl formControlName="email" required>
+        <mat-label class="input-name">Email</mat-label>
+        <input matInput>
+        <mat-error *ngIf="miFormulario.get('email')?.hasError('required')">{{ getErrorMessage('email') }}</mat-error>
+        <mat-error *ngIf="miFormulario.get('email')?.hasError('email')">{{ getErrorMessage('email') }}</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="example-full-width" ngDefaultControl formControlName="password" required>
+        <mat-label class="input-name">Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button">
+          <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="miFormulario.get('password')?.hasError('required')">{{ getErrorMessage('password') }}</mat-error>
+      </mat-form-field>
+  
+      
+      <button class="btn-login" mat-stroked-button color="basic" type="submit">Iniciar Session</button>
+    </form>
+  </div>
