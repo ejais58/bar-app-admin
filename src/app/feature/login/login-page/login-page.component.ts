@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../auth/service/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,13 +14,13 @@ export class LoginPageComponent implements OnInit {
 
   loginSubscribe: Subscription;
 
-  constructor(private httpClient: HttpClient, private fb: FormBuilder, private router: Router) {
+  constructor(private httpClient: HttpClient, private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.loginSubscribe = new Subscription();
   }
 
 
   miFormulario: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    username: ['', [Validators.required]],
     password: ['', [Validators.required]],
   })
 
@@ -36,30 +37,30 @@ export class LoginPageComponent implements OnInit {
       return 'You must enter a value';
     }
 
-    return control?.hasError('email') ? 'Not a valid email' : '';
+    return control?.hasError('username') ? 'Not a valid email' : '';
   }
 
-  // login() {
+  login() {
 
-  //   const {email, password} = this.miFormulario.value
+    const {username, password} = this.miFormulario.value
+    
+    this.loginSubscribe = this.authService.login(username,password).subscribe((respuesta: any) =>{
+      console.log(respuesta);
 
-  //   this.loginSubscribe = this.authService.login(email,password).subscribe((respuesta: any) =>{
-  //     console.log(respuesta);
+      if (respuesta.token) {
+        // Guardar el token en localStorage
+        localStorage.setItem('token', respuesta.token);
 
-  //     if (respuesta.token) {
-  //       // Guardar el token en localStorage
-  //       localStorage.setItem('token', respuesta.token);
+        // Redireccionar después de una respuesta exitosa
+        //this.router.navigate(['/home']);
+      } else {
+        console.error(respuesta);
+      }
 
-  //       // Redireccionar después de una respuesta exitosa
-  //       this.router.navigate(['/home']);
-  //     } else {
-  //       console.error(respuesta);
-  //     }
-
-  //   })
+    })
 
 
-  // }
+  }
 
   ngOnDestroy(): void {
     if (this.loginSubscribe) {

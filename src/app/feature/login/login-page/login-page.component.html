@@ -1,8 +1,8 @@
 <div class="container">
-    <form class="example-form" [formGroup]="miFormulario" >
+    <form class="example-form" [formGroup]="miFormulario" (ngSubmit)="login()">
       <h2>Login</h2>
-      <mat-form-field class="example-full-width" ngDefaultControl formControlName="email" required>
-        <mat-label class="input-name">Email</mat-label>
+      <mat-form-field class="example-full-width" ngDefaultControl formControlName="username" required>
+        <mat-label class="input-name">Username</mat-label>
         <input matInput>
         <mat-error *ngIf="miFormulario.get('email')?.hasError('required')">{{ getErrorMessage('email') }}</mat-error>
         <mat-error *ngIf="miFormulario.get('email')?.hasError('email')">{{ getErrorMessage('email') }}</mat-error>
