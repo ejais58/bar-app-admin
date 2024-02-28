@@ -11,6 +11,6 @@ export class HomeService {
   constructor(private httpClient: HttpClient) { }
 
   allProducts(){
-    return this.httpClient.get(`${this.base_url}/product/all/1`);
+    return this.httpClient.get(`${this.base_url}/product/all/65daa0e091f55b4d529734c5`);
   }
 }
