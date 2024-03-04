@@ -20,6 +20,9 @@
     margin-left: 10px;
     font-size: 17px;
 }
+.no-data-message{
+    font-size: 17px;
+}
 
 .selector-input {
     margin-left: 10px; 

@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { AuthService } from '../../auth/service/auth.service';
+import { Payload } from 'src/app/models/payload.interface';
 
 @Component({
   selector: 'app-login-page',
@@ -50,17 +51,15 @@ export class LoginPageComponent implements OnInit {
       if (respuesta.token) {
         // Guardar el token en localStorage
         localStorage.setItem('token', respuesta.token);
-
-        // Redireccionar después de una respuesta exitosa
-        //this.router.navigate(['/home']);
+        
+        this.router.navigate(['/home'])
       } else {
         console.error(respuesta);
       }
 
     })
-
-
   }
+
 
   ngOnDestroy(): void {
     if (this.loginSubscribe) {
