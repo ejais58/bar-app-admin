@@ -1,7 +1,27 @@
 <div class="container">
 
+  <!-- navbar -->
+  <mat-toolbar class="navbar">
+    
+    <span class="nav-title">Panel de administrador de {{userBarName}}</span>
+    <span class="example-spacer"></span>
+
+    <mat-icon class="btn-logout" [matMenuTriggerFor]="logoutMenu">person</mat-icon>
+    <mat-menu #logoutMenu="matMenu">
+        <button mat-menu-item>Perfil</button>
+        <button mat-menu-item (click)="logout()">Cerrar Session</button>
+    </mat-menu>
+
+    <mat-icon [matMenuTriggerFor]="ReceptionMenu">menu</mat-icon>
+    <mat-menu #ReceptionMenu="matMenu">
+        <button mat-menu-item>Contacto</button>
+        <button mat-menu-item>Acerca de</button>
+    </mat-menu>
+
+</mat-toolbar>
+
   <!-- buscador -->
-  <form action=""  [formGroup]="mySearch" (ngSubmit)="loadDataSearch()">
+  <form [formGroup]="mySearch" (ngSubmit)="loadDataSearch()">
     <div class="search-container">
       <mat-form-field class="search-input"  ngDefaultControl formControlName="search">
         <input matInput placeholder="Buscar">

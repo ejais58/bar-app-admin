@@ -5,6 +5,7 @@ import { HomeService } from '../service/home.service';
 import { AuthService } from '../../auth/service/auth.service';
 import { Payload } from 'src/app/models/payload.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -15,16 +16,19 @@ export class HomePageComponent implements OnInit {
 
   loadProduct: Subscription;
   userId: string = '';
+  userBarName: string = '';
 
   data: Product[] = [];
   displayedColumns: string[] = ['prod_name', 'prod_description', 'prod_category', 'prod_price', 'prod_status', 'actions'];
 
-  constructor(private homeService: HomeService, private authService: AuthService, private fb: FormBuilder) {
+  constructor(private homeService: HomeService, private authService: AuthService, private fb: FormBuilder, private router: Router) {
     this.loadProduct = new Subscription();
-    this.authService.getCurrentUser().subscribe((user: Payload) =>{
+    this.authService.getCurrentUser().subscribe((user: Payload | null) =>{
       console.log(user);
-      
-      this.userId = user.userId
+      if(user){
+        this.userId = user.userId
+        this.userBarName = user.userBarName
+      }
     })
   }
   
@@ -44,6 +48,10 @@ export class HomePageComponent implements OnInit {
     
   }
 
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
+  }
 
   loadDataSearch() {
     const {search, type} = this.mySearch.value

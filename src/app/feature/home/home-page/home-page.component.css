@@ -2,13 +2,28 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 200px;
 }
+
 
 .search-container {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    margin-top: 100px;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+
+}
+
+.nav-title{
+    margin-left: 10px;
+}
+
+.btn-logout{
+    margin-right: 50px;
+    font-size: 25px;
 }
 
 .search-input {

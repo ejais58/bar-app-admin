@@ -11,7 +11,7 @@ export class AuthService {
 
   base_url: string = environment.apiUrl;
 
-  currentUserSubject = new BehaviorSubject<Payload>({userId:'', userFullName: '', userBarName: ''});
+  currentUserSubject = new BehaviorSubject<Payload | null>(null);
   currentUser$: Observable<any> = this.currentUserSubject.asObservable();
 
   constructor(private httpClient: HttpClient ) {
@@ -36,6 +36,11 @@ export class AuthService {
 
   getCurrentUser(){
     return this.currentUserSubject.asObservable();
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+    this.currentUserSubject.next(null)
   }
 
   loggedIn() {
